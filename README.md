@@ -10,6 +10,12 @@ PHP >= 7.1\
 MySQL: 5.7\
 [composer - Dependency Manager for PHP](https://getcomposer.org/download/) 
 
+#Install
+
+```bash
+$ git clone https://github.com/filipefernandes007/skinnylink
+```
+
 #Bonus
 
 Vagrant file if you prefer. Just run: 

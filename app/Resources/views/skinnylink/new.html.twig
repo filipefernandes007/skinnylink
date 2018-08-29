@@ -77,6 +77,12 @@
                 resultErrorDivId: '#result_error'
             });
 
+            $('#appbundle_skinnylink_url').bind('focus', function (e) {
+                $(this).val('');
+
+                return false;
+            });
+
             $('#go_for_skinny_link').on('click', function(event) {
                 event.preventDefault();
 

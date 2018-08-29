@@ -8,6 +8,8 @@
     use AppBundle\Entity\SkinnyLink;
     use AppBundle\Repository\SkinnyLinkRepository;
     use AppBundle\Service\SkinnyLinkService;
+    use Monolog\Logger;
+    use Psr\Log\LoggerInterface;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,31 +26,31 @@
     {
         /**
          * @Route("", name="skinnylink_new_api", methods={"POST"})
+         * @param LoggerInterface $logger
          * @param Request $request
          * @return JsonResponse
          * @throws \Exception
          */
-        public function newAction(Request $request) : JsonResponse {
-            /** @var SkinnyLink|null $entity */
-            $entity = null;
-
-            /** @var string $error */
-            $error = null;
-
+        public function newAction(LoggerInterface $logger, Request $request) : JsonResponse {
             $url = $request->get('url');
+
+            /** @var SkinnyLink|null $skinnyLink */
+            $skinnyLink = null;
 
             if (!empty($url)) {
                 $skinnyLink = new SkinnyLink();
                 $skinnyLink->setUrl($url);
 
                 try {
-                    $entity = $this->container->get(SkinnyLinkService::class)->create($skinnyLink);
+                    $skinnyLink = $this->container->get(SkinnyLinkService::class)->create($skinnyLink);
                 } catch (\InvalidArgumentException $e) {
-                    $error = $e->getMessage();
+                    $logger->error("Error creating SkinnyLink : {$e->getMessage()}");
+
+                    return new JsonResponse(['error' => $e->getMessage()], 200);
                 }
             }
 
-            return new JsonResponse(['data' => $entity !== null ? $entity->toArray() : null, 'error' => $error], 200);
+            return new JsonResponse($skinnyLink->toArray(), 200);
         }
 
         /**

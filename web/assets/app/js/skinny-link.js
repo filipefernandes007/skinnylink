@@ -46,8 +46,8 @@ var SkinnyLinkModule = (function() {
                 async:      true,
                 data: {'url' : url},
                 success: function(data, status) {
-                    if (!!data.data) {
-                        var _url = __redirectUrl.replace('!123abc', data.data.skinnyUrl);
+                    if (!!data.id) {
+                        var _url = __redirectUrl.replace('!123abc', data.skinnyUrl);
 
                         $skinnyLink.attr('href', _url);
                         $skinnyLink.text(__host + _url);
@@ -63,7 +63,7 @@ var SkinnyLinkModule = (function() {
                     $goButton.show();
                 },
                 error : function(xhr, textStatus, errorThrown) {
-                    alertify.error(xhr.responseJSON.error);
+                    alertify.error(textStatus);
 
                     console.log(textStatus);
 

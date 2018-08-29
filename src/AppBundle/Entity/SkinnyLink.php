@@ -21,7 +21,7 @@ class SkinnyLink
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Column(name="id", type="bigint", options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -37,7 +37,7 @@ class SkinnyLink
     /**
      * @var string
      *
-     * @ORM\Column(name="skinny_url", type="string", length=255, unique=true, options={"unsigned":true})
+     * @ORM\Column(name="skinny_url", type="string", length=255, unique=true)
      */
     private $skinnyUrl;
 

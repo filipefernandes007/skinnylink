@@ -48,7 +48,7 @@
                 }
             }
 
-            return new JsonResponse(['data' => $entity !== null ? $entity->toArray() : null, 'error' => $error], $error === null ? 200 : 404);
+            return new JsonResponse(['data' => $entity !== null ? $entity->toArray() : null, 'error' => $error], 200);
         }
 
         /**

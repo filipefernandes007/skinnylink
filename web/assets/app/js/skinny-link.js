@@ -33,6 +33,8 @@ var SkinnyLinkModule = (function() {
             var $loader     = $(__buttonLoadId);
             var $copyLink   = $(__copyLinkId);
 
+            $skinnyLink.text('');
+
             $goButton.hide();
             $loader.show();
 
@@ -43,19 +45,23 @@ var SkinnyLinkModule = (function() {
                 async:      true,
                 data: {'url' : url},
                 success: function(data, status) {
-                    var _url = __redirectUrl.replace('!123abc', data.data.skinnyUrl);
+                    if (!!data.data) {
+                        var _url = __redirectUrl.replace('!123abc', data.data.skinnyUrl);
 
-                    $skinnyLink.attr('href', _url);
-                    $skinnyLink.text(__host + _url);
+                        $skinnyLink.attr('href', _url);
+                        $skinnyLink.text(__host + _url);
+                        $copyLink.show();
+                    } else if (!!data.error) {
+                        alertify.alert(data.error);
+                    }
 
                     console.log(data);
 
                     $loader.hide();
                     $goButton.show();
-                    $copyLink.show();
                 },
                 error : function(xhr, textStatus, errorThrown) {
-                    $skinnyLink.text(data.data.error);
+                    alertify.alert(xhr.responseJSON.error);
 
                     console.log(textStatus);
 

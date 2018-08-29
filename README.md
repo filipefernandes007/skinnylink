@@ -38,7 +38,7 @@ $ vagrant reload
 
 If you see the same message again, go to this [link](https://stackoverflow.com/questions/43492322/vagrant-was-unable-to-mount-virtualbox-shared-folders). There are several and good approaches to follow.
 
-#
+#Run application
 
 Now start the application (it does not start automatically, but if you want, uncomment the `` php bin/console server:run 192.168.33.89:8000 `` command in your Vagrant file to do so next time you 'reload' Vagrant):  
 
@@ -47,5 +47,15 @@ $ vagrant ssh
 $ cd var/www
 $ composer run-app # OR php bin/console server:run 192.168.33.89:8000 
 ```
+
+#Unit tests
+
+You can run tests with bash command ``` composer test ```
+
+Apply ``` php bin/console cache:clear ``` if you get this message after ``` composer test ``` : 
+
+"_Remaining deprecation notices (1)
+   1x: The "Sensio\Bundle\FrameworkExtraBundle\Configuration\Route" annotation is deprecated since version 5.2. Use "Symfony\Component\Routing\Annotation\Route" instead._
+"
 
 Enjoy!

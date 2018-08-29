@@ -23,6 +23,7 @@
     {% endfor %}
 
     <h1>Paste the url and get your Skinny Link!</h1>
+    <mark>Your url must start with 'http://' or 'https://'</mark>
 
     {{ form_start(form) }}
 
@@ -72,12 +73,11 @@
                 event.preventDefault();
 
                 var $copyLink = $('#copy_link');
+                var url       = $('#appbundle_skinnylink_url').val();
 
                 $copyLink.css('background-color', 'gray');
                 $copyLink.css('color', 'black');
                 $copyLink.text('Copy Skinny Link');
-
-                var url = $('#appbundle_skinnylink_url').val();
 
                 SkinnyLinkModule.new(url);
             });

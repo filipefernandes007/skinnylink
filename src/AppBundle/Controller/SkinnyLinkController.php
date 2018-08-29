@@ -20,8 +20,7 @@ class SkinnyLinkController extends Controller
     /**
      * Creates a new skinnyLink entity.
      *
-     * @Route("", name="skinnylink_new")
-     * @Method({"GET", "POST"})
+     * @Route("", name="skinnylink_new", methods={"GET", "POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
@@ -54,8 +53,7 @@ class SkinnyLinkController extends Controller
     /**
      * Finds and displays a skinnyLink entity.
      *
-     * @Route("/{id}", name="skinnylink_show")
-     * @Method("GET")
+     * @Route("/{id}", name="skinnylink_show", methods={"GET"})
      * @param string $id
      * @return Response
      */
@@ -84,7 +82,9 @@ class SkinnyLinkController extends Controller
     }
 
     /**
-     * @Route("/skinny-link/{url}", requirements={"url":"[$|_|.|+|!|%]*[a-zA-Z0-9]+"}, name="skinnylink_redirect_to_url")
+     * @Route("/skinny-link/{url}", requirements={"url":"[$|_|.|+|!|%]*[a-zA-Z0-9]+"},
+     *                              name="skinnylink_redirect_to_url",
+     *                              methods={"GET"})
      * @param string $url
      * @return Response
      * @throws \Exception

@@ -55,7 +55,8 @@
         "post-update-cmd": [
             "@symfony-scripts"
         ],
-        "run-app": "php bin/console server:run 192.168.33.89:8000"
+        "run-app": "php bin/console server:run 192.168.33.89:8000",
+        "test": "phpunit"
     },
     "config": {
         "sort-packages": true,

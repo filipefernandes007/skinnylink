@@ -37,7 +37,7 @@ var SkinnyLinkModule = (function() {
             $loader.show();
 
             $.ajax({
-                url:        '/api/new',
+                url:        '/api',
                 type:       'POST',
                 dataType:   'json',
                 async:      true,

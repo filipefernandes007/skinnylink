@@ -8,12 +8,10 @@
     use AppBundle\Entity\SkinnyLink;
     use AppBundle\Repository\SkinnyLinkRepository;
     use AppBundle\Service\SkinnyLinkService;
-    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+    use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\Routing\Annotation\Route;
 
     /**
      * Class ApiController
@@ -25,8 +23,7 @@
     class ApiController extends Controller
     {
         /**
-         * @Route("/new", name="skinnylink_new_api")
-         * @Method({"POST"})
+         * @Route("", name="skinnylink_new_api", methods={"POST"})
          * @param Request $request
          * @return JsonResponse
          * @throws \Exception
@@ -36,7 +33,7 @@
             $entity = null;
 
             /** @var string $error */
-            $error  = null;
+            $error = null;
 
             $url = $request->get('url');
 
@@ -57,8 +54,7 @@
         /**
          * Finds and displays a skinnyLink entity.
          *
-         * @Route("/{id}", name="skinnylink_get_api")
-         * @Method("GET")
+         * @Route("/{id}", name="skinnylink_get_api", methods={"GET"})
          * @param string $id
          * @return JsonResponse
          */

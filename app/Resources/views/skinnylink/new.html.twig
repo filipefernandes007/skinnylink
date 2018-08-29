@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block stylesheets %}
+        {{ parent() }}
+
+        <style>
+            .result {
+                text-align: left;
+                padding-left: 0.5em;
+            }
+        </style>
+    {% endblock %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+
+    <h1>Paste the url and get your Skinny Link!</h1>
+
+    {{ form_start(form) }}
+
+    <div class="input-group">
+        {{ form_errors(form.url) }}
+        {{ form_widget(form.url, {'attr' : {'class' : 'form-control form-control-lg', 'placeholder' : 'Your link to diet here', 'width' : '80%'}}) }}
+        <div class="input-group-append">
+            <button id="go_for_skinny_link" class="btn btn-success" type="submit">Go</button>
+            <button id="button_load" class="btn btn-success" style="display: none; background-color: gray;">
+                <i class="fa fa-spinner fa-spin"></i>&nbsp;
+            </button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+    <p>
+        <h6 class="result">
+            <a id="skinny_link_result" style="font-size: small;" target="_blank"></a>
+            <input id="skinny_link_result_to_copy" style="display:none;"/>
+        </h6>
+    </p>
+
+    <button class="btn btn-block" id="copy_link" onclick="copySkinnyLink(this)" style="display:none;">Copy Skinny Link</button>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('assets/app/js/skinny-link.js') }}"></script>
+
+    <script>
+        var host        = '{{ app.request.getSchemeAndHttpHost() }}';
+        var redirectUrl = "{{ path('skinnylink_redirect_to_url', {url : '!123abc'}) }}";
+
+        $(document).ready(function() {
+            SkinnyLinkModule.init({
+                redirectUrl: redirectUrl,
+                host: host,
+                resultDivId: '#skinny_link_result',
+                buttonLoadId: '#button_load',
+                goButtonId: '#go_for_skinny_link',
+                copyLinkId: '#copy_link'
+            });
+
+            $('#go_for_skinny_link').on('click', function(event) {
+                event.preventDefault();
+
+                var $copyLink = $('#copy_link');
+
+                $copyLink.css('background-color', 'gray');
+                $copyLink.css('color', 'black');
+                $copyLink.text('Copy Skinny Link');
+
+                var url = $('#appbundle_skinnylink_url').val();
+
+                SkinnyLinkModule.new(url);
+            });
+        });
+
+        function copySkinnyLink(e) {
+            var url   = $('#skinny_link_result').text();
+            var $temp = $('<input>');
+
+            $('body').append($temp);
+            $temp.val(url).select();
+            document.execCommand('copy');
+            $temp.remove();
+
+            $(e).css('background-color', 'black');
+            $(e).css('color', 'white');
+            $(e).text('Skinny Link in your Clipboard. Just paste.');
+        }
+
+    </script>
+
+{% endblock %}

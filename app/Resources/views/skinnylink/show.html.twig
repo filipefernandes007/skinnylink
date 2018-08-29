@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if skinnyLink is not null %}
+        <h1>Your SkinnyLink</h1>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Url</th>
+                    <td><a data-id="{{ skinnyLink.id }}" href="{{ skinnyLink.url }}" target="_blank">{{ skinnyLink.url }}</a></td>
+                </tr>
+                <tr>
+                    <th>SkinnyUrl</th>
+                    <td><a data-id="{{ skinnyLink.id }}" href="{{ path('skinnylink_redirect_to_url', {url: skinnyLink.skinnyUrl}) }}" target="_blank">{{ app.request.getSchemeAndHttpHost() }}/{{ skinnyLink.skinnyUrl }}</a></td>
+                </tr>
+                <tr>
+                    <th>Created At</th>
+                    <td>{% if skinnyLink.createdAt %}{{ skinnyLink.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <h1 class="alert-warning">&nbsp;No SkinnyLink found for <i>{{ id }}</i>&nbsp;</h1>
+    {% endif %}
+
+    <a href="{{ path('skinnylink_new') }}">New skinny link?</a>
+
+{% endblock %}

@@ -40,6 +40,10 @@
                 throw new \InvalidArgumentException('Invalid url');
             }
 
+            if (!@file_get_contents($skinnyLink->getUrl())) {
+                throw new \InvalidArgumentException('Url does not exist!');
+            }
+
             /** @var SkinnyLink $existingSkinnyLink */
             $existingSkinnyLink = $this->repository->findOneBy(['url' => $skinnyLink->getUrl()]);
 

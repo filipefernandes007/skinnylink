@@ -36,6 +36,7 @@ var SkinnyLinkModule = (function() {
             $skinnyLink.text('');
 
             $goButton.hide();
+            $copyLink.hide();
             $loader.show();
 
             $.ajax({
@@ -51,8 +52,9 @@ var SkinnyLinkModule = (function() {
                         $skinnyLink.attr('href', _url);
                         $skinnyLink.text(__host + _url);
                         $copyLink.show();
+                        alertify.success('SkinnyLink created!');
                     } else if (!!data.error) {
-                        alertify.alert(data.error);
+                        alertify.error(data.error);
                     }
 
                     console.log(data);
@@ -61,7 +63,7 @@ var SkinnyLinkModule = (function() {
                     $goButton.show();
                 },
                 error : function(xhr, textStatus, errorThrown) {
-                    alertify.alert(xhr.responseJSON.error);
+                    alertify.error(xhr.responseJSON.error);
 
                     console.log(textStatus);
 

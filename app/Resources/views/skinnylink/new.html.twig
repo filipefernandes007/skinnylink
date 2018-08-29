@@ -67,7 +67,6 @@
         var redirectUrl = "{{ path('skinnylink_redirect_to_url', {url : '!123abc'}) }}";
 
         $(document).ready(function() {
-            alertify.error("Error notification");
             SkinnyLinkModule.init({
                 redirectUrl: redirectUrl,
                 host: host,

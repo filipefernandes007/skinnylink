@@ -5,7 +5,7 @@ $script = <<-SCRIPT
     echo "Start composer updating. This can take some minutes."
     composer self-update
     cd /var/www
-    composer update
+    composer install
     php bin/console doctrine:migrations:migrate
     #php bin/console server:run 192.168.33.89:8000
 SCRIPT

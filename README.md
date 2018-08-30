@@ -16,6 +16,31 @@ This project allows you to shrink your links. It is a SF 3.4 based application. 
 
 ```bash
 $ git clone https://github.com/filipefernandes007/skinnylink
+$ cd skinnylink
+$ composer self-update
+$ composer install
+```
+
+If you are not going to use Vagrant, **ensure** that you have in your local machine
+the database **skinny**.
+
+You can use this bash command (change user and password) : 
+
+```
+$ mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS skinny CHARACTER SET utf8 COLLATE utf8_general_ci;"
+```
+
+If you have other credentials (*in this case, don't forget to change app/config/parameters.yml file!*): 
+
+```
+$ mysql -u <user> -p<pwd> -e "CREATE DATABASE IF NOT EXISTS skinny CHARACTER SET utf8 COLLATE utf8_general_ci;"
+```
+
+After this, run migrations and than run the application :
+
+```
+$ php bin/console doctrine:migrations:migrate
+$ php bin/console server:run
 ```
 
 #Bonus

@@ -9,6 +9,9 @@ Memory >= 2048\
 PHP >= 7.1\
 MySQL: 5.7\
 [composer - Dependency Manager for PHP](https://getcomposer.org/download/) 
+[ext-pdo](http://php.net/manual/en/pdo.installation.php)
+[ext-pdo-mysql](http://php.net/manual/en/ref.pdo-mysql.php)
+[ext-xml](http://php.net/manual/en/dom.setup.php)
 
 #Install
 

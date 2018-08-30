@@ -35,16 +35,8 @@
          * @return SkinnyLink
          * @throws \InvalidArgumentException
          */
-        public function create(SkinnyLink &$skinnyLink) : SkinnyLink
+        public function create(SkinnyLink $skinnyLink) : SkinnyLink
         {
-            if (!filter_var($skinnyLink->getUrl(), FILTER_VALIDATE_URL)) {
-                throw new \InvalidArgumentException('Invalid url');
-            }
-
-            if (!@file_get_contents($skinnyLink->getUrl(), false, $this->getCheckUrlOptions())) {
-                throw new \InvalidArgumentException('Url does not exist!');
-            }
-
             /** @var SkinnyLink $existingSkinnyLink */
             $existingSkinnyLink = $this->repository->findOneBy(['url' => $skinnyLink->getUrl()]);
 
@@ -53,6 +45,14 @@
                 $skinnyLink = $existingSkinnyLink;
 
                 return $skinnyLink;
+            }
+
+            if (!filter_var($skinnyLink->getUrl(), FILTER_VALIDATE_URL)) {
+                throw new \InvalidArgumentException('Invalid url');
+            }
+
+            if (!@file_get_contents($skinnyLink->getUrl(), false, $this->getCheckUrlOptions())) {
+                throw new \InvalidArgumentException('Url does not exist!');
             }
 
             $this->objectManager->persist($skinnyLink);

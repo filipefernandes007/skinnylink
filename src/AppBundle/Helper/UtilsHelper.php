@@ -51,16 +51,16 @@
          */
         public static function generateRandomSpecialChar(int $length = 1) : string
         {
-            $array  = ['$','_','.','+','!','%'];
+            $array  = ['$','_','.','+','!'];
 
             if ($length === 1) {
-                return $array[random_int(0,5)];
+                return $array[random_int(0,4)];
             }
 
             $result = '';
 
             for ($i = 0; $i < $length; $i++) {
-                $result .= $array[random_int(0,5)];
+                $result .= $array[random_int(0,4)];
             }
 
             return $result;

@@ -45,13 +45,6 @@
             <a id="skinny_link_result" style="font-size: small;" target="_blank"></a>
             <input id="skinny_link_result_to_copy" style="display:none;"/>
         </h6>
-        <div class="alert alert-warning" role="alert" style="display: none;">
-            <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-            </button>
-            <h6 id="result_error" class="error alert alert-warning"></h6>
-        </div>
     </p>
 
     <button class="btn btn-block" id="copy_link" onclick="copySkinnyLink(this)" style="display:none;">Copy Skinny Link</button>
@@ -73,8 +66,7 @@
                 resultDivId: '#skinny_link_result',
                 buttonLoadId: '#button_load',
                 goButtonId: '#go_for_skinny_link',
-                copyLinkId: '#copy_link',
-                resultErrorDivId: '#result_error'
+                copyLinkId: '#copy_link'
             });
 
             $('#appbundle_skinnylink_url').bind('focus', function (e) {

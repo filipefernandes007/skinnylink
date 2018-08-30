@@ -12,6 +12,7 @@ var SkinnyLinkModule = (function() {
     var __goButtonId;
     var __redirectUrl;
     var __copyLinkId;
+    var __getSkinnyLink;
     var __this = this;
 
     return {
@@ -22,6 +23,7 @@ var SkinnyLinkModule = (function() {
             __goButtonId    = obj.goButtonId;
             __copyLinkId    = obj.copyLinkId;
             __redirectUrl   = obj.redirectUrl;
+            __getSkinnyLink = obj.getSkinnyLink;
         },
         new: function(url) {
             if (url === '') {
@@ -37,6 +39,7 @@ var SkinnyLinkModule = (function() {
 
             $goButton.hide();
             $copyLink.hide();
+            $('.result').hide();
             $loader.show();
 
             $.ajax({
@@ -51,6 +54,10 @@ var SkinnyLinkModule = (function() {
 
                         $skinnyLink.attr('href', _url);
                         $skinnyLink.text(__host + _url);
+
+                        $(__getSkinnyLink).attr('href', __host + '/' + data.id);
+
+                        $('.result').show();
                         $copyLink.show();
                         alertify.success('SkinnyLink created!');
                     } else if (!!data.error) {

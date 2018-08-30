@@ -9,6 +9,10 @@
                 text-align: left;
                 padding-left: 0.5em;
             }
+            #get_skinny_link {
+                color: #000;
+                text-decoration: none;
+            }
         </style>
     {% endblock %}
 
@@ -41,9 +45,9 @@
     {{ form_end(form) }}
 
     <p>
-        <h6 class="result">
-            <a id="skinny_link_result" style="font-size: small;" target="_blank"></a>
-            <input id="skinny_link_result_to_copy" style="display:none;"/>
+        <h6 class="result" style="display: none;">
+            <a id="get_skinny_link" class="fa fa-info-circle"></a> &nbsp;<a id="skinny_link_result" style="font-size: small;" target="_blank"></a>
+            <input id="skinny_link_result_to_copy" style="display: none;" />
         </h6>
     </p>
 
@@ -66,7 +70,8 @@
                 resultDivId: '#skinny_link_result',
                 buttonLoadId: '#button_load',
                 goButtonId: '#go_for_skinny_link',
-                copyLinkId: '#copy_link'
+                copyLinkId: '#copy_link',
+                getSkinnyLink: '#get_skinny_link'
             });
 
             $('#appbundle_skinnylink_url').bind('focus', function (e) {

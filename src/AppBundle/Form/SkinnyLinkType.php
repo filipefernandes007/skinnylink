@@ -14,10 +14,7 @@ class SkinnyLinkType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('url', UrlType::class, [
-                         'attr'  => ['style' => 'width: 90%'],
-                         'label' => false
-                     ]);
+        $builder->add('url', UrlType::class, ['label' => false]);
     }/**
      * {@inheritdoc}
      */

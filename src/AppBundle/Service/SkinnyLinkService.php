@@ -8,11 +8,12 @@
 
     use AppBundle\Entity\SkinnyLink;
     use Doctrine\Common\Persistence\ObjectManager;
-    use Symfony\Component\Debug\Debug;
 
     class SkinnyLinkService
     {
         const TIME_OUT_CHECK_URL = 5;
+        const INVALID_URL        = 'Invalid url';
+        const URL_DOES_NOT_EXIST = 'Url does not exist!';
 
         /** @var ObjectManager */
         protected $objectManager;
@@ -48,11 +49,11 @@
             }
 
             if (!filter_var($skinnyLink->getUrl(), FILTER_VALIDATE_URL)) {
-                throw new \InvalidArgumentException('Invalid url');
+                throw new \InvalidArgumentException(self::INVALID_URL);
             }
 
             if (!@file_get_contents($skinnyLink->getUrl(), false, $this->getCheckUrlOptions())) {
-                throw new \InvalidArgumentException('Url does not exist!');
+                throw new \InvalidArgumentException(self::URL_DOES_NOT_EXIST);
             }
 
             $this->objectManager->persist($skinnyLink);
@@ -64,7 +65,8 @@
         /**
          * @return resource
          */
-        private function getCheckUrlOptions() {
+        private function getCheckUrlOptions()
+        {
             /** @var array $timeout */
             $timeout = ['timeout' => self::TIME_OUT_CHECK_URL];
 

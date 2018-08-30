@@ -13,6 +13,13 @@
                 color: #000;
                 text-decoration: none;
             }
+            .add-url-container {
+                margin-top: 2%;
+                height: 30%;
+            }
+            #copy_link {
+                margin-top: 2%;
+            }
         </style>
     {% endblock %}
 
@@ -27,7 +34,7 @@
     {% endfor %}
 
     <h1>Paste the url and get your Skinny Link!</h1>
-    <mark>Your url must start with 'http://' or 'https://'</mark>
+    <p><mark>Your url must start with 'http://' or 'https://'</mark></p>
 
     {{ form_start(form) }}
 
@@ -44,14 +51,14 @@
 
     {{ form_end(form) }}
 
-    <p>
+    <div class="add-url-container">
         <h6 class="result" style="display: none;">
             <a id="get_skinny_link" class="fa fa-info-circle"></a> &nbsp;<a id="skinny_link_result" style="font-size: small;" target="_blank"></a>
             <input id="skinny_link_result_to_copy" style="display: none;" />
         </h6>
-    </p>
 
-    <button class="btn btn-block" id="copy_link" onclick="copySkinnyLink(this)" style="display:none;">Copy Skinny Link</button>
+        <button class="btn btn-block" id="copy_link" onclick="copySkinnyLink(this)" style="display:none;">Copy Skinny Link</button>
+    </div>
 
 {% endblock %}
 {% block javascripts %}
